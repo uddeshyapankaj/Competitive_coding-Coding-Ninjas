@@ -1,0 +1,41 @@
+//fenwick tree
+#include <iostream>
+
+using namespace std;
+void update(int index,int value,int *fenwick,int n)
+{
+    for(;index<=n;index+=index&(-index))
+    {
+        fenwick[index]+=value;
+    }
+}
+int query(int *fenwick,int index)
+{
+    int sum=0;
+    for(;index>0;index-=index&(-index))
+    {
+        sum+=fenwick[index];
+    }
+    return sum;
+}
+int main()
+{
+   int n;
+   cin>>n;
+   int *arr=new int[n+1];
+   int *fenwick=new int[n+1];
+   
+   for(int i=1;i<=n;i++)
+   {
+       cin>>arr[i];
+        update( i,arr[i],fenwick,n);
+   }
+   
+   //to update;
+  
+   // to add numbers from 3 to 6 index;
+   
+   cout<<query(fenwick,6)-query(fenwick,3)<<endl;
+
+    return 0;
+}
