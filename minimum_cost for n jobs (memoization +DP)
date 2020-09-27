@@ -1,0 +1,35 @@
+//min cost for jobs by bitmasking
+#include <bits/stdc++.h>
+
+using namespace std;
+int minimum(int arr[4][4],int n,int p,int mask)
+{
+    if(p>=n)
+    return 0;
+    int mini=INT_MAX;
+    for(int j=0;j<n;j++)
+    {
+        if((mask&(1<<j))==0)
+        {
+            int ans=minimum(arr,n,p+1,mask| (1<<j))+arr[p][j];
+            if(ans<mini)
+            {
+                mini=ans;
+            }
+            
+        }
+    }
+    return mini;
+}
+
+int main()
+{
+    int arr[4][4]={{1,2,56,4},{23,4,6,2},{23,4,56,34},{12,34,10,56}};
+    
+    cout<<minimum(arr,4,0,0);
+    
+    
+    
+
+    return 0;
+}
